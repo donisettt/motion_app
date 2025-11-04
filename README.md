@@ -53,9 +53,8 @@ Aplikasi menggunakan API dari TMDb.
 
 ## Demo Aplikasi
 
-| Halaman | Preview |
-|--------|---------|
-| Home | <img src="https://github.com/user-attachments/assets/53d9b572-3904-43cf-8d06-b915aa35c43b" width="200"/> |
-| Search | <img src="https://github.com/user-attachments/assets/eb671def-866f-425c-bdb3-7de033df9b2e" width="200"/> |
-| Home | <img src="https://github.com/user-attachments/assets/bd150707-0a05-4a34-a357-3875f25ed888" width="200"/> |
-| Profil Dummy | <img src="https://github.com/user-attachments/assets/49f5ce46-9782-4ff3-9c1f-9b2facdb1877" width="200"/> |
+Link Demo Vidio: https://drive.google.com/drive/folders/187qscr_ybDEIEzAbYVVX-Lwo8ykGz-9v?usp=sharing
+
+| Dashboard | Search | Dashboard Bawah | Profil |
+|---|---|---|---|
+| <img src="https://github.com/user-attachments/assets/53d9b572-3904-43cf-8d06-b915aa35c43b" width="150"/> | <img src="https://github.com/user-attachments/assets/eb671def-866f-425c-bdb3-7de033df9b2e" width="150"/> | <img src="https://github.com/user-attachments/assets/bd150707-0a05-4a34-a357-3875f25ed888" width="150"/> | <img src="https://github.com/user-attachments/assets/49f5ce46-9782-4ff3-9c1f-9b2facdb1877" width="150"/> |
