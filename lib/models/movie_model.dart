@@ -1,13 +1,10 @@
-// lib/models/movie_model.dart (VERSI FINAL)
-
 class Movie {
-  final int id; // Tambahan: ID unik film
+  final int id;
   final String title;
   final String posterPath;
   final String backdropPath;
   final double voteAverage;
   final String releaseDate;
-  // Tambahan: overview (sinopsis) untuk digunakan di DetailScreen
   final String overview; 
 
   Movie({
@@ -27,13 +24,8 @@ class Movie {
       posterPath: json['poster_path'] ?? '',
       backdropPath: json['backdrop_path'] ?? '',
       
-      // PERBAIKAN VOTE AVERAGE (Mengamankan parsing)
       voteAverage: (json['vote_average'] as num?)?.toDouble() ?? 0.0, 
-      
-      // PERBAIKAN RELEASE DATE
       releaseDate: json['release_date'] ?? json['first_air_date'] ?? '',
-      
-      // Tambahan: overview
       overview: json['overview'] ?? 'Sinopsis tidak tersedia.',
     );
   }
@@ -43,7 +35,6 @@ class Movie {
   
   String get releaseYear {
     if (releaseDate.isEmpty) return 'N/A';
-    // Menghindari error jika format tanggal tidak standar
     try {
       return releaseDate.split('-').first;
     } catch (_) {

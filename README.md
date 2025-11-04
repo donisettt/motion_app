@@ -49,19 +49,13 @@ Aplikasi menggunakan API dari TMDb.
 3. API Key dimasukkan di file:  
    `lib/services/api_services.dart`
 
-> Catatan Keamanan:
-> Untuk production **disarankan** menyimpan API Key di luar source code (dotenv / flavors / environment variables).
-
 ---
 
-## ⚙️ Panduan Setup & Instalasi
+## ## Demo Aplikasi
 
-### 1. Prasyarat
-- Flutter SDK
-- Dart SDK
-- VS Code / Android Studio
-
-### 2. Clone Repository
-```bash
-git clone [URL_REPO] motion_app
-cd motion_app
+| Halaman | Preview |
+|--------|---------|
+| Home | ![Dashboard](https://github.com/user-attachments/assets/53d9b572-3904-43cf-8d06-b915aa35c43b) |
+| Search | ![Search](https://github.com/user-attachments/assets/eb671def-866f-425c-bdb3-7de033df9b2e) |
+| Home | ![Dashboard Bawah](https://github.com/user-attachments/assets/bd150707-0a05-4a34-a357-3875f25ed888) |
+| Profil Dummy | ![Profil](https://github.com/user-attachments/assets/49f5ce46-9782-4ff3-9c1f-9b2facdb1877) |

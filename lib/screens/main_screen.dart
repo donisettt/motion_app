@@ -15,19 +15,14 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  // Daftar Widget yang dapat diakses melalui Bottom Navigation Bar
   late List<Widget> _screens;
 
   @override
   void initState() {
     super.initState();
-    // Inisialisasi daftar screen.
-    // Index 0: DetailScreen dengan film yang sudah ada
-    // Index 1: ProfileScreen
     _screens = <Widget>[
       DetailScreen(movie: widget.initialMovie),
       const ProfileScreen(),
-      // Di masa depan, Anda bisa menambahkan 'HomeScreen()' di sini
     ];
   }
 
@@ -40,10 +35,8 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Menampilkan screen yang terpilih
       body: _screens[_selectedIndex],
       
-      // Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -56,11 +49,11 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.red, // Warna aktif
+        selectedItemColor: Colors.red,
         unselectedItemColor: Colors.grey,
-        backgroundColor: Colors.black, // Background hitam
+        backgroundColor: Colors.black,
         onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed, // Memastikan background hitam terlihat
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }

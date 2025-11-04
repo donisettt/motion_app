@@ -14,24 +14,18 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   final ApiService _apiService = ApiService();
-  // Future untuk menampung data Cast & Crew
   late Future<Map<String, dynamic>> _creditsFuture;
-  late Future<String?> _videoKeyFuture; // Future untuk menyimpan kunci YouTube
-  // --- BARU: Future untuk Ulasan Penonton ---
+  late Future<String?> _videoKeyFuture;
   late Future<List<Map<String, dynamic>>> _reviewsFuture;
 
   @override
   void initState() {
     super.initState();
-    // Panggil API credits saat halaman dimuat menggunakan ID film
     _creditsFuture = _apiService.getMovieCredits(widget.movie.id);
-    // Panggil API video/trailer saat halaman dimuat
     _videoKeyFuture = _apiService.getMovieVideos(widget.movie.id);
-    // --- BARU: Panggil API Ulasan Penonton ---
     _reviewsFuture = _apiService.getMovieReviews(widget.movie.id);
   }
 
-  // Fungsi untuk membuka URL (Trailer YouTube)
   void _launchTrailer(String key) async {
     final url = Uri.parse('https://www.youtube.com/watch?v=$key');
 
@@ -57,7 +51,6 @@ class _DetailScreenState extends State<DetailScreen> {
     }
   }
 
-  // Widget untuk menampilkan satu card Aktor/Kru (tetap sama)
   Widget _buildCastCrewCard(Map<String, dynamic> person) {
     String imageUrl = person['profile_path'] != null
         ? 'https://image.tmdb.org/t/p/w200${person['profile_path']}'
@@ -115,7 +108,6 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  // --- BARU: Widget untuk menampilkan Ulasan Pengguna ---
   Widget _buildReviewsSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,22 +133,19 @@ class _DetailScreenState extends State<DetailScreen> {
             } else if (snapshot.hasError) {
               return Text('Gagal memuat ulasan: ${snapshot.error}', style: const TextStyle(color: Colors.white70));
             } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-              // Ambil maksimal 3 ulasan teratas untuk tampilan ringkas
               final reviews = snapshot.data!.take(3).toList();
               
               return ListView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(), // Menonaktifkan scrolling agar tidak konflik
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: reviews.length,
                 itemBuilder: (context, index) {
                   final review = reviews[index];
                   final author = review['author'] ?? 'Penonton Anonim';
                   final content = review['content'] ?? 'Tidak ada konten ulasan.';
                   
-                  // Batasi konten ulasan untuk tampilan ringkas
                   String previewContent = content;
                   if (content.length > 200) {
-                    // Batasi 200 karakter dan ganti baris baru dengan spasi
                     previewContent = content.substring(0, 200).replaceAll('\n', ' ') + '...';
                   }
 
@@ -201,16 +190,14 @@ class _DetailScreenState extends State<DetailScreen> {
       ],
     );
   }
-  // -----------------------------------------------------------------
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Set background hitam
+      backgroundColor: Colors.black,
       body: CustomScrollView(
         slivers: [
-          // 1. AppBar yang Tampil Beda (SliverAppBar)
           SliverAppBar(
             expandedHeight: 250.0,
             pinned: true,
@@ -247,7 +234,6 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
           ),
 
-          // 2. Body Konten Detail
           SliverList(
             delegate: SliverChildListDelegate([
               Padding(
@@ -255,7 +241,6 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Rating dan Tahun Rilis
                     Row(
                       children: [
                         const Icon(Icons.star, color: Colors.amber, size: 20),
@@ -281,7 +266,6 @@ class _DetailScreenState extends State<DetailScreen> {
 
                     const SizedBox(height: 20),
 
-                    // TOMBOL TONTON TRAILER
                     FutureBuilder<String?>(
                       future: _videoKeyFuture,
                       builder: (context, snapshot) {
@@ -309,7 +293,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 ),
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red, // Warna utama
+                                backgroundColor: Colors.red,
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 12,
                                 ),
@@ -325,7 +309,6 @@ class _DetailScreenState extends State<DetailScreen> {
                       },
                     ),
 
-                    // Judul Sinopsis
                     const Text(
                       'Sinopsis',
                       style: TextStyle(
@@ -336,7 +319,6 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                     const SizedBox(height: 10),
 
-                    // Detail Sinopsis
                     Text(
                       widget.movie.overview.isEmpty
                           ? 'Sinopsis tidak tersedia.'
@@ -351,7 +333,6 @@ class _DetailScreenState extends State<DetailScreen> {
 
                     const SizedBox(height: 30),
 
-                    // SEKSI CAST & CREW
                     const Text(
                       'Cast & Crew',
                       style: TextStyle(
@@ -431,11 +412,9 @@ class _DetailScreenState extends State<DetailScreen> {
 
                     const SizedBox(height: 40),
 
-                    // --- BARU: SEKSI ULASAN PENONTON ---
                     _buildReviewsSection(),
-                    // -----------------------------------
                     
-                    const SizedBox(height: 40), // Jarak di bawah reviews
+                    const SizedBox(height: 40), 
                   ],
                 ),
               ),

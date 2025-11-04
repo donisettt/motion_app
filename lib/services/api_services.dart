@@ -25,13 +25,12 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body); // Mengembalikan body JSON yang berisi 'cast' dan 'crew'
+      return jsonDecode(response.body);
     } else {
       throw Exception('Failed to load movie credits for ID $movieId');
     }
   }
   
-  // FUNGSI MENGAMBIL VIDEO (TRAILER)
   Future<String?> getMovieVideos(int movieId) async {
     final response = await http.get(
       Uri.parse('$_baseUrl/movie/$movieId/videos?api_key=$_apiKey')
@@ -42,7 +41,6 @@ class ApiService {
       final videos = data['results'] as List<dynamic>?;
 
       if (videos != null) {
-        // Cari video yang bertipe 'Trailer' dan bersumber dari 'YouTube'
         final trailer = videos.firstWhere(
           (v) => v['type'] == 'Trailer' && v['site'] == 'YouTube',
           orElse: () => null,
@@ -56,7 +54,6 @@ class ApiService {
     }
   }
 
-  // --- FUNGSI BARU: MENGAMBIL ULASAN (REVIEWS) ---
   Future<List<Map<String, dynamic>>> getMovieReviews(int movieId) async {
     final response = await http.get(
       Uri.parse('$_baseUrl/movie/$movieId/reviews?api_key=$_apiKey')
@@ -64,7 +61,6 @@ class ApiService {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      // Mengembalikan daftar ulasan (list of maps)
       return (data['results'] as List<dynamic>?)
           ?.cast<Map<String, dynamic>>() ?? [];
     } else {
@@ -72,7 +68,6 @@ class ApiService {
       throw Exception('Failed to load movie reviews');
     }
   }
-  // ------------------------------------------------
 
   Future<List<Movie>> searchMovies(String query) async {
     if (query.trim().isEmpty) {

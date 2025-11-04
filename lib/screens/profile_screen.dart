@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-  // Helper Widget untuk Opsi Menu
   Widget _buildOptionTile(BuildContext context, IconData icon, String title, VoidCallback onTap, {Color? textColor}) {
     return ListTile(
       leading: Icon(icon, color: textColor ?? Colors.white70),
@@ -37,7 +36,6 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Avatar Profil (Dummy)
             CircleAvatar(
               radius: 60,
               backgroundColor: Colors.red.shade800,
@@ -49,7 +47,6 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15),
 
-            // Nama Pengguna (Dummy)
             const Text(
               'Doni Setiawan Wahyono',
               style: TextStyle(
@@ -60,7 +57,6 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 5),
 
-            // Email (Dummy)
             Text(
               '23552011146@sttbandung.ac.id',
               style: TextStyle(
@@ -70,13 +66,11 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             
-            // Opsi dan Pengaturan
             _buildOptionTile(
               context, 
               Icons.favorite_border, 
               'Daftar Film Favorit', 
               () {
-                // Aksi: Arahkan ke halaman Favorite (Index 2)
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Mengarah ke halaman Favorite...'))
                 );

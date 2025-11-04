@@ -1,9 +1,7 @@
-// lib/screens/search_screen.dart (VERSI PERBAIKAN FINAL)
-
 import 'package:flutter/material.dart';
 import '../models/movie_model.dart';
 import '../services/api_services.dart';
-import 'detail_screen.dart'; // Import DetailScreen untuk navigasi
+import 'detail_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -50,7 +48,6 @@ class _SearchScreenState extends State<SearchScreen> {
     }
   }
   
-  // Widget untuk menampilkan card film dalam GridView
   Widget _buildMovieCard(Movie movie) {
     return GestureDetector(
       onTap: () {
@@ -64,7 +61,6 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-            // Gambar Poster
             Expanded(
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
@@ -78,7 +74,6 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
             ),
             const SizedBox(height: 4),
-            // Judul
             Text(
                 movie.title,
                 maxLines: 2,
@@ -90,7 +85,6 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  // --- IMPLEMENTASI BUILD YANG HILANG/TERLUPAKAN ---
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +95,6 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: Column(
         children: [
-          // Input Pencarian
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
@@ -129,7 +122,6 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
 
-          // Area Hasil
           Expanded(
             child: _isLoading
                 ? const Center(child: CircularProgressIndicator(color: Colors.red))

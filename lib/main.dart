@@ -1,13 +1,10 @@
-// lib/main.dart (VERSI FINAL DENGAN NAVIGASI DAN PROFILE)
-
 import 'package:flutter/material.dart';
 import 'services/api_services.dart';
 import 'models/movie_model.dart';
 import 'widgets/now_playing_carousel.dart';
 import 'widgets/horizontal_movie_list.dart';
-// --- IMPORT HALAMAN BARU ---
 import 'screens/search_screen.dart';
-import 'screens/profile_screen.dart'; // BARU: Import ProfileScreen
+import 'screens/profile_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,17 +33,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late ApiService _apiService;
   
-  // Variabel untuk menampung Future data (hanya untuk halaman Home)
   late Future<List<Movie>> _nowPlayingFuture;
   late Future<List<Movie>> _trendingFuture;
   late Future<List<Movie>> _popularFuture;
   late Future<List<Movie>> _topRatedFuture;
 
-  // --- VARIABEL DAN DAFTAR HALAMAN ---
-  int _selectedIndex = 0; // Index 0 = Home
-  late List<Widget> _widgetOptions; // Daftar widget/halaman
+  int _selectedIndex = 0;
+  late List<Widget> _widgetOptions;
 
-  // Fungsi untuk membuat konten halaman Home
   Widget _buildHomePageBody() {
     return SingleChildScrollView(
       child: Column(
@@ -73,12 +67,11 @@ class _HomeScreenState extends State<HomeScreen> {
     _popularFuture = _apiService.getPopularMovies();
     _topRatedFuture = _apiService.getTopRatedMovies();
 
-    // Inisialisasi daftar widget/halaman
     _widgetOptions = <Widget>[
-      _buildHomePageBody(), // Index 0: Halaman Home
-      SearchScreen(),       // Index 1: Halaman Search
+      _buildHomePageBody(),
+      SearchScreen(),
       Center(child: const Text('Favorite Page (Coming Soon)', style: TextStyle(color: Colors.white))),
-      const ProfileScreen(), // BARU: Index 3: Halaman Profile
+      const ProfileScreen(),
       Center(child: const Text('More Page (Coming Soon)', style: TextStyle(color: Colors.white))),
     ];
   }
@@ -92,7 +85,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar hanya tampil di halaman Home (index 0)
       appBar: _selectedIndex == 0
           ? AppBar(
               backgroundColor: Colors.black,
@@ -109,9 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(width: 10),
               ],
             )
-          : null, // AppBar null di halaman lain
+          : null,
 
-      // Tampilkan Widget yang dipilih
       body: _widgetOptions.elementAt(_selectedIndex),
 
       bottomNavigationBar: BottomNavigationBar(
@@ -119,8 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: Colors.red,
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex, // Set index aktif
-        onTap: _onItemTapped, // Tambahkan fungsi tap
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
